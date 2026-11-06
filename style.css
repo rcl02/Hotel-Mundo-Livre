@@ -229,3 +229,40 @@ section{padding:72px 0}
 .collage img,.day-photos img,.team-photos img{transition:transform .4s ease}
 .collage img:hover,.day-photos img:hover,.team-photos img:hover{transform:scale(1.03) rotate(-.6deg)}
 .cta-box .btn-gold{animation:breathe 2.8s ease-in-out infinite}
+
+/* Movimento sutil contínuo (também desligado por prefers-reduced-motion) */
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.06)}}
+@keyframes pan{from{object-position:center 52%}to{object-position:center 68%}}
+@keyframes dashes{to{background-position:0 32px}}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+
+/* Foto do topo "respira" devagar */
+.hero-media img{animation:pan 14s ease-in-out infinite alternate}
+
+/* Galeria: zoom lento, cada foto num ritmo */
+.gallery img{animation:kenburns 16s ease-in-out infinite alternate}
+.gallery figure:nth-child(2n) img{animation-duration:19s;animation-delay:-6s}
+.gallery figure:nth-child(3n) img{animation-duration:22s;animation-delay:-11s}
+.gallery figure:hover img{animation-play-state:paused}
+
+/* Itens entram um depois do outro */
+.gallery figure:nth-child(3n+2),.testimonials .t-card:nth-child(3n+2){--d:.1s}
+.gallery figure:nth-child(3n),.testimonials .t-card:nth-child(3n){--d:.2s}
+.timeline li:nth-child(2){--d:.06s}.timeline li:nth-child(3){--d:.12s}.timeline li:nth-child(4){--d:.18s}.timeline li:nth-child(5){--d:.24s}.timeline li:nth-child(6){--d:.3s}
+
+/* Traço verde que cresce embaixo dos títulos ao aparecer */
+.reveal h2::after{content:"";display:block;width:0;height:3px;border-radius:2px;background:var(--leaf);margin-top:12px;transition:width .8s .25s ease}
+.reveal.in h2::after{width:56px}
+
+/* Linha pontilhada da rotina andando devagar */
+.timeline::before{animation:dashes 3s linear infinite}
+
+/* Menu: sublinhado que desliza */
+.nav a{position:relative}
+.nav a::after{content:"";position:absolute;left:4px;right:4px;bottom:6px;height:2px;background:var(--leaf);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.nav a:hover::after{transform:scaleX(1)}
+
+/* Serviços: linha desliza e a seta do botão "chama" */
+.service{transition:padding-left .3s ease}
+.service:hover{padding-left:8px}
+.service .btn span{display:inline-block;animation:nudge 1.8s ease-in-out infinite}
